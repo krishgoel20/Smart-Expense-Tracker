@@ -47,8 +47,9 @@ Most expense trackers require you to manually tag every transaction, or rely on 
 
 ## How it works
 
+```
 User uploads a CSV, or adds a transaction manually
-↓
+                   ↓
 FastAPI parses/validates the input (Pydantic: amount > 0, valid date, valid txn_type)
 ↓
 Transaction stored in MySQL — category_id NULL, category_source = "uncategorized"
@@ -74,7 +75,7 @@ transaction updated: category_source = "manual"
 React dashboard fetches /transactions (paginated) and /summary/* endpoints
 ↓
 Category bars, monthly totals, and top merchants render from live SQL aggregation
-
+```
 
 ---
 
