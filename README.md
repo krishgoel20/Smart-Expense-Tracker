@@ -11,7 +11,7 @@ A full-stack, AI-powered personal finance app where messy bank/UPI transaction t
 - Let an LLM automatically categorize each transaction and extract a clean merchant name from raw, inconsistent descriptions (*"SWIGGY*ORD 88213 BLR"* → merchant: **Swiggy**, category: **Food**)
 - Correct a wrong AI category with one action — the correction (original → corrected) is permanently logged, not just overwritten
 - View spend broken down by category as proportional ledger-style bars
-- View monthly income vs. spend totals
+- View monthly income v/s spend totals
 - See top merchants by total spend
 - Register/login with a personal account — every transaction, upload, and categorization run is scoped to that account only
 - Browse transaction history with pagination, built to scale beyond a handful of rows
