@@ -11,7 +11,7 @@ A full-stack, AI-powered personal finance app where messy bank/UPI transaction t
 - Let an LLM automatically categorize each transaction and extract a clean merchant name from raw, inconsistent descriptions (*"SWIGGY*ORD 88213 BLR"* → merchant: **Swiggy**, category: **Food**)
 - Correct a wrong AI category with one action — the correction (original → corrected) is permanently logged, not just overwritten
 - View spend broken down by category as proportional ledger-style bars
-- View monthly income vs. spend totals
+- View monthly income v/s spend totals
 - See top merchants by total spend
 - Register/login with a personal account — every transaction, upload, and categorization run is scoped to that account only
 - Browse transaction history with pagination, built to scale beyond a handful of rows
@@ -47,53 +47,55 @@ Most expense trackers require you to manually tag every transaction, or rely on 
 
 ## How it works
 
+```
 User uploads a CSV, or adds a transaction manually
-↓
+                      ↓
 FastAPI parses/validates the input (Pydantic: amount > 0, valid date, valid txn_type)
-↓
+                      ↓
 Transaction stored in MySQL — category_id NULL, category_source = "uncategorized"
-↓
+                      ↓
 User triggers "Categorize Pending"
-↓
+                      ↓
 For each uncategorized transaction:
 raw description → Groq LLM prompt (structured JSON output)
-↓
+                      ↓
 LLM returns { "merchant_name": ..., "category": ... }
-↓
+                      ↓
 If the API call fails → fallback to category "Other", logged, processing continues
 If the returned category isn't in the valid list → fallback to "Other"
-↓
+                      ↓
 transaction updated: category_id set, category_source = "ai"
-↓
+                      ↓
 [Optional] User manually corrects a wrong category
-↓
+                      ↓
 original category logged to correction_log
-↓
+                      ↓
 transaction updated: category_source = "manual"
-↓
+                      ↓
 React dashboard fetches /transactions (paginated) and /summary/* endpoints
-↓
+                      ↓
 Category bars, monthly totals, and top merchants render from live SQL aggregation
-
+```
 
 ---
 
 ## Project Structure
 
+```
 Expense-Tracker/
-├── main.py # FastAPI app: all endpoints (auth, transactions, upload, categorize, summaries)
-├── auth.py # Password hashing, JWT creation/verification, user lookup
-├── ingest.py # DB connection config, CSV/row ingestion logic
-├── categorize.py # Groq prompt, categorization loop, manual correction logic
-├── schema.sql # Full MySQL schema (categories, transactions, correction_log, users)
-├── data/
-│ └── mock_transactions.csv
-├── .env # DB credentials, GROQ_API_KEY, JWT_SECRET (not committed)
+├── backend/
+│   ├── main.py                      # FastAPI app: all endpoints (auth, transactions, upload, categorize, summaries)
+│   ├── auth.py                      # Password hashing, JWT creation/verification, user lookup
+│   ├── ingest.py                    # DB connection config, CSV/row ingestion logic
+│   ├── categorize.py                # Groq prompt, categorization loop, manual correction logic
+│   ├── schema.sql                   # Full MySQL schema (categories, transactions, correction_log, users)
+│   ├── data/
+│   │   └── mock_transactions.csv
 └── frontend/
-└── src/
-├── App.jsx # Dashboard, login/register screen, all fetch logic
-└── App.css # Dark ledger theme, proportional category bars, badges
-
+│   └── src/
+│   │   ├── App.jsx # Dashboard, login/register screen, all fetch logic
+│   │   └── App.css # Dark ledger theme, proportional category bars, badges
+```
 
 ---
 
@@ -101,12 +103,12 @@ Expense-Tracker/
 
 4 core tables:
 
+```
 users — username + bcrypt password hash
 categories — fixed spending categories (Food, Rent, Transport, Income, etc.)
-transactions — date, raw description, merchant name, amount, type, category,
-category_source (ai/manual/uncategorized), linked to a user
+transactions — date, raw description, merchant name, amount, type, category, category_source (ai/manual/uncategorized), linked to a user
 correction_log — audit trail: transaction_id, original_category_id, corrected_category_id
-
+```
 
 ---
 
@@ -135,6 +137,7 @@ pip install fastapi uvicorn mysql-connector-python python-dotenv groq bcrypt pyt
 
 Create a `.env` file in the project root:
 
+```
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_mysql_password
@@ -142,15 +145,17 @@ DB_NAME=expense_tracker
 
 GROQ_API_KEY=your_groq_api_key
 JWT_SECRET=your_long_random_secret
+```
 
+### 4. Run the backend
 
-### 4. Run the database schema
+Run the database schema:
 
 ```bash
 mysql -u root -p < schema.sql
 ```
 
-### 5. Start the backend
+Start the backend:
 
 ```bash
 uvicorn main:app --reload
