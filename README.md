@@ -84,17 +84,17 @@ Category bars, monthly totals, and top merchants render from live SQL aggregatio
 ```
 Expense-Tracker/
 ├── backend/
-│   ├── main.py                      # FastAPI app: all endpoints (auth, transactions, upload, categorize, summaries)
-│   ├── auth.py                      # Password hashing, JWT creation/verification, user lookup
-│   ├── ingest.py                    # DB connection config, CSV/row ingestion logic
-│   ├── categorize.py                # Groq prompt, categorization loop, manual correction logic
-│   ├── schema.sql                   # Full MySQL schema (categories, transactions, correction_log, users)
+│   ├── main.py                    # FastAPI app: all endpoints (auth, transactions, upload, categorize, summaries)
+│   ├── auth.py                    # Password hashing, JWT creation/verification, user lookup
+│   ├── ingest.py                  # DB connection config, CSV/row ingestion logic
+│   ├── categorize.py              # Groq prompt, categorization loop, manual correction logic
+│   ├── schema.sql                 # Full MySQL schema (categories, transactions, correction_log, users)
 │   ├── data/
 │   │   └── mock_transactions.csv
 └── frontend/
 │   └── src/
-│   │   ├── App.jsx # Dashboard, login/register screen, all fetch logic
-│   │   └── App.css # Dark ledger theme, proportional category bars, badges
+│   │   ├── App.jsx                # Dashboard, login/register screen, all fetch logic
+│   │   └── App.css                # Dark ledger theme, proportional category bars, badges
 ```
 
 ---
