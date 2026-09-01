@@ -1,4 +1,4 @@
-# Smart Expense Tracker 💸
+# SpendSense 💸
 
 A full-stack, AI-powered personal finance app where messy bank/UPI transaction text becomes structured, categorized financial data — combining an LLM categorization pipeline, a relational database with a full audit trail, and per-user authentication into one working system.
 
