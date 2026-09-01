@@ -22,7 +22,7 @@ A full-stack, AI-powered personal finance app where messy bank/UPI transaction t
 
 Most expense trackers require you to manually tag every transaction, or rely on brittle keyword rules that break the moment a bank changes its statement format.
 
-| Feature | Traditional approach | Smart Expense Tracker |
+| Feature | Traditional approach | SpendSense |
 |---|---|---|
 | **Categorization** | Manual tagging or fixed keyword rules | LLM reads the raw description and classifies it, no rules to maintain |
 | **Merchant identification** | Not extracted — raw text shown as-is | LLM extracts a clean merchant name in the same API call |
