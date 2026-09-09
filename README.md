@@ -181,22 +181,22 @@ Register a new user directly from the app's login screen — no seed credentials
 
 ## Features
 
-### AI Features
-- **AI Categorization** — a single Groq API call reads the raw transaction description and returns structured JSON with both a category and a clean merchant name
-- **Graceful degradation** — if the Groq API call fails (rate limit, outage, invalid key), the transaction falls back to category "Other" instead of crashing the whole batch, and the failure is logged
-- **Category validation** — if the LLM ever returns a category outside the approved list, it's caught and defaulted to "Other" rather than corrupting the database
+### 🧠 AI Features
+- 🏷️ **AI Categorization** — a single Groq API call reads the raw transaction description and returns structured JSON with both a category and a clean merchant name
+- 🩹 **Graceful degradation** — if the Groq API call fails (rate limit, outage, invalid key), the transaction falls back to category "Other" instead of crashing the whole batch, and the failure is logged
+- ✔️ **Category validation** — if the LLM ever returns a category outside the approved list, it's caught and defaulted to "Other" rather than corrupting the database
 
-### Expense Tracking Features
-- **CSV upload** — parse a full bank/UPI statement in one request
-- **Manual transaction entry** — add a single transaction directly from the dashboard
-- **Manual correction with audit trail** — override any AI-assigned category; the original and corrected values are both permanently logged
-- **Pagination** — transactions load 10 at a time with Previous/Next controls, built to scale past a handful of rows
-- **Analytics** — spend-by-category (rendered as proportional bars), monthly income vs. spend, and top-5 merchants by spend, all computed via SQL aggregation
+### 💰 Expense Tracking Features
+- 📤 **CSV upload** — parse a full bank/UPI statement in one request
+- ✍️ **Manual transaction entry** — add a single transaction directly from the dashboard
+- 📝 **Manual correction with audit trail** — override any AI-assigned category; the original and corrected values are both permanently logged
+- 📖 **Pagination** — transactions load 10 at a time with Previous/Next controls, built to scale past a handful of rows
+- 📊 **Analytics** — spend-by-category (rendered as proportional bars), monthly income vs. spend, and top-5 merchants by spend, all computed via SQL aggregation
 
-### Auth & Access
-- **JWT authentication** — register/login with bcrypt-hashed passwords, 24-hour token expiry
-- **Per-user data isolation** — every transaction, upload, and categorization run is scoped to `user_id`; verified directly by testing that a second account sees zero of the first account's data
-- **Persistent login** — token stored in `localStorage`, survives a page refresh
+### 🔐 Auth & Access Features
+- 🔑 **JWT authentication** — register/login with bcrypt-hashed passwords, 24-hour token expiry
+- 🚪 **Per-user data isolation** — every transaction, upload, and categorization run is scoped to `user_id`; verified directly by testing that a second account sees zero of the first account's data
+- 🔄 **Persistent login** — token stored in `localStorage`, survives a page refresh
 
 ---
 
