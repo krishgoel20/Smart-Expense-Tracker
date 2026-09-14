@@ -101,7 +101,7 @@ Expense-Tracker/
 
 ## Database Schema
 
-4 core tables:
+4 core tables :
 
 ```
 users — username + bcrypt password hash
