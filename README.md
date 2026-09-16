@@ -182,7 +182,7 @@ Register a new user directly from the app's login screen — no seed credentials
 ## Features
 
 ### 🧠 AI Features
-- 🏷️ **AI Categorization** — a single Groq API call reads the raw transaction description and returns structured JSON with both a category and a clean merchant name
+- 🏷️ **AI categorization** — a single Groq API call reads the raw transaction description and returns structured JSON with both a category and a clean merchant name
 - 🩹 **Graceful degradation** — if the Groq API call fails (rate limit, outage, invalid key), the transaction falls back to category "Other" instead of crashing the whole batch, and the failure is logged
 - ✔️ **Category validation** — if the LLM ever returns a category outside the approved list, it's caught and defaulted to "Other" rather than corrupting the database
 
